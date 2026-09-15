@@ -371,6 +371,207 @@ linear-gradient(180deg,#ffe1bd 0%,#f3c998 100%);border:4px solid #fff;box-shadow
   display:none;pointer-events:none;background:transparent;
 }
 #stageTransition.active{display:block;pointer-events:all}
+
+/* ===== MOBILE UI V1 : dedicated compact interface, desktop unchanged ===== */
+.character-face-mobile{display:none}
+
+@media (pointer:coarse) and (max-width:1200px){
+  /* Common mobile menu canvas */
+  body.touch-ui #start,
+  body.touch-ui #characterSelect,
+  body.touch-ui #coopsket,
+  body.touch-ui #stageSelect{
+    padding:max(8px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right))
+            max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));
+    align-items:center;
+    justify-content:center;
+  }
+  body.touch-ui #start .dialog,
+  body.touch-ui #characterSelect .dialog,
+  body.touch-ui #coopsket .dialog,
+  body.touch-ui #stageSelect .dialog{
+    width:min(680px,100%);
+    max-height:calc(var(--mobile-vh,100dvh) - 16px);
+    overflow:auto;
+    overscroll-behavior:contain;
+    padding:14px 16px;
+    border-radius:16px;
+  }
+
+  /* START — only core actions */
+  body.touch-ui #start .badge,
+  body.touch-ui #start .dialog>p{display:none}
+  body.touch-ui #start .dialog h2{
+    margin:0 0 12px;
+    font-size:clamp(1.35rem,6vw,2rem);
+    line-height:1.06;
+  }
+  body.touch-ui #start .nick-row{max-width:430px;margin:0 auto 8px}
+  body.touch-ui #start .nick-row input{min-height:48px;font-size:1rem;text-align:center}
+  body.touch-ui #start .start-actions{max-width:430px;margin-bottom:6px}
+  body.touch-ui #start .start-actions button{min-height:48px;font-size:.92rem}
+  body.touch-ui #start .meta-note{font-size:.64rem;margin:4px 0}
+  body.touch-ui #startRankCard{
+    max-width:430px;
+    min-height:42px;
+    margin:7px auto 0;
+    padding:10px 12px;
+    border:1px solid #ffffff22;
+    border-radius:11px;
+    background:#111a29;
+    display:grid;
+    place-items:center;
+  }
+  body.touch-ui #startRankCard h3{margin:0;color:#f7d16b;font-size:.78rem}
+  body.touch-ui #startRankCard .rank-list{display:none}
+  body.touch-ui #pwaGuide{max-width:430px;margin-top:7px;padding:8px 10px;font-size:.62rem}
+  body.touch-ui #pwaGuide .guide-line:nth-of-type(2),
+  body.touch-ui #pwaGuide .guide-tip{display:none}
+  body.touch-ui #pwaGuide .guide-title{font-size:.7rem;margin-bottom:3px}
+
+  /* CHARACTER — face-first cards */
+  body.touch-ui #characterSelect .badge,
+  body.touch-ui #characterSelect .character-sub,
+  body.touch-ui #characterSelect .character-role,
+  body.touch-ui #characterSelect .character-desc,
+  body.touch-ui #characterSelect .character-tags,
+  body.touch-ui #characterSelect .selected-label{display:none!important}
+  body.touch-ui #characterSelect h2{margin:0 0 10px;font-size:1.35rem}
+  body.touch-ui #characterSelect .character-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:9px;
+    margin:6px 0 12px;
+    max-height:none;
+    overflow:visible;
+  }
+  body.touch-ui #characterSelect .character-card,
+  body.touch-ui #characterSelect .character-card#charKim{
+    min-height:146px;
+    padding:10px 7px 8px;
+    border-radius:14px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+  }
+  body.touch-ui #characterSelect .character-portrait,
+  body.touch-ui #characterSelect .character-portrait.kim-portrait{
+    width:88px;height:88px;
+    flex:0 0 88px;
+    margin:3px auto 7px;
+    border-radius:50%;
+  }
+  body.touch-ui #characterSelect .character-portrait::after{display:none}
+  body.touch-ui #characterSelect .character-fullbody{display:none}
+  body.touch-ui #characterSelect .character-face-mobile{
+    display:block;
+    position:absolute;inset:0;
+    width:100%;height:100%;
+    object-fit:cover;
+    z-index:2;
+  }
+  body.touch-ui #characterSelect .character-avatar{width:62px;height:62px}
+  body.touch-ui #characterSelect .character-card h3{font-size:.88rem;margin:2px 0}
+  body.touch-ui #characterSelect .coming-soon{
+    top:8px;left:50%;right:auto;transform:translateX(-50%);
+    font-size:.5rem;padding:3px 6px;white-space:nowrap;
+  }
+  body.touch-ui #characterSelect .character-check{right:7px;top:7px}
+  body.touch-ui #characterSelect .character-actions{
+    position:static;
+    display:grid;grid-template-columns:1fr 1.5fr;
+    gap:8px;padding:0;background:none;
+  }
+  body.touch-ui #characterSelect .character-actions button{min-height:46px}
+
+  /* SHOP — compact because it sits between character and stage select */
+  body.touch-ui #coopsket .badge,
+  body.touch-ui #coopsket .shop-hero,
+  body.touch-ui #coopsket .shop-char .meta-note,
+  body.touch-ui #coopsket .upgrade-card p{display:none!important}
+  body.touch-ui #coopsket .shop-top{margin:0 0 8px;padding:7px 10px}
+  body.touch-ui #coopsket .shop-char .mini-face{width:34px;height:34px;font-size:.9rem}
+  body.touch-ui #coopsket .wallet{font-size:.86rem}
+  body.touch-ui #coopsket .upgrade-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:7px;margin:8px 0 10px;
+  }
+  body.touch-ui #coopsket .upgrade-card{
+    padding:9px 7px;text-align:center;border-radius:11px
+  }
+  body.touch-ui #coopsket .upgrade-card h3{font-size:.76rem;margin:2px 0}
+  body.touch-ui #coopsket .upgrade-level{font-size:.58rem;margin-bottom:5px}
+  body.touch-ui #coopsket .upgrade-buy{min-height:34px;font-size:.7rem}
+  body.touch-ui #coopsket .character-actions{display:grid;grid-template-columns:1fr 1.5fr;gap:8px}
+  body.touch-ui #coopsket .character-actions button{min-height:44px}
+
+  /* STAGE — visual card + difficulty buttons only */
+  body.touch-ui #stageSelect .badge,
+  body.touch-ui #stageSelect .stage-dialog>p,
+  body.touch-ui #stageSelect .selected-label,
+  body.touch-ui #stageSelect .difficulty-head,
+  body.touch-ui #stageSelect .difficulty-note,
+  body.touch-ui #stageSelect .stage-card p{display:none!important}
+  body.touch-ui #stageSelect h2{margin:0 0 8px;font-size:1.3rem}
+  body.touch-ui #stageSelect .stage-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;margin:5px 0 9px;
+  }
+  body.touch-ui #stageSelect .stage-grid .stage-card:nth-child(3){display:none}
+  body.touch-ui #stageSelect .stage-card{
+    min-height:128px;padding:8px;border-radius:12px
+  }
+  body.touch-ui #stageSelect .stage-art{height:66px;margin-bottom:6px;border-radius:9px}
+  body.touch-ui #stageSelect .stage-card .character-role{font-size:.52rem}
+  body.touch-ui #stageSelect .stage-card h3{font-size:.8rem;margin:2px 0}
+  body.touch-ui #stageSelect .difficulty-wrap{margin:6px 0 9px}
+  body.touch-ui #stageSelect .difficulty-grid{
+    grid-template-columns:repeat(3,1fr);
+    gap:6px
+  }
+  body.touch-ui #stageSelect .difficulty-btn{
+    min-height:44px;padding:6px 4px;text-align:center;border-radius:10px
+  }
+  body.touch-ui #stageSelect .difficulty-btn b{font-size:.72rem}
+  body.touch-ui #stageSelect .difficulty-btn small{display:none}
+  body.touch-ui #stageSelect .character-actions{
+    display:grid;grid-template-columns:1fr 1.6fr;gap:8px
+  }
+  body.touch-ui #stageSelect .character-actions button{min-height:46px}
+
+  /* IN-GAME MOBILE: auto-aim / auto-attack, only movement + DASH */
+  body.touch-ui .mobile-aim,
+  body.touch-ui .mobile-action.fire{display:none!important}
+  body.touch-ui .mobile-buttons{
+    right:max(var(--mobile-edge,10px),env(safe-area-inset-right));
+  }
+  body.touch-ui .mobile-action.dash{
+    display:block;
+    width:var(--mobile-btn-w,94px);
+    min-height:var(--mobile-fire-h,66px);
+    border-color:#87c8ff;
+    background:linear-gradient(180deg,#2377b9e8,#164f83e8);
+    color:white;
+    font-size:var(--mobile-btn-font,.72rem);
+  }
+}
+
+/* Short landscape phones: extra compact menu typography */
+@media (pointer:coarse) and (orientation:landscape) and (max-height:460px){
+  body.touch-ui #start .dialog,
+  body.touch-ui #characterSelect .dialog,
+  body.touch-ui #coopsket .dialog,
+  body.touch-ui #stageSelect .dialog{padding:9px 12px}
+  body.touch-ui #characterSelect .character-card,
+  body.touch-ui #characterSelect .character-card#charKim{min-height:120px}
+  body.touch-ui #characterSelect .character-portrait,
+  body.touch-ui #characterSelect .character-portrait.kim-portrait{width:70px;height:70px;flex-basis:70px}
+  body.touch-ui #stageSelect .stage-card{min-height:108px}
+  body.touch-ui #stageSelect .stage-art{height:52px}
+  body.touch-ui #pwaGuide{display:none!important}
+}
+
 </style>
 </head><body><audio id="menuBgm" preload="auto" loop src="audio/bgm/menu_bgm.mp3" style="display:none"></audio><audio id="stage1Bgm" preload="auto" src="audio/bgm/stage1_bgm.mp3" style="display:none"></audio><audio id="stage1MidbossBgm" preload="auto" loop src="audio/bgm/stage1_midboss_bgm.mp3" style="display:none"></audio><audio id="stage2Bgm" preload="auto" loop src="audio/bgm/stage2_bgm.mp3" style="display:none"></audio><audio id="stage1FinalBossBgm" preload="auto" loop src="audio/bgm/stage1_finalboss_bgm.mp3" style="display:none"></audio><img id="playerFrontSprite" src="assets/kim_ingame_vertical.png" alt="" aria-hidden="true" style="display:none"><img id="playerSideSprite" src="assets/kim_ingame_horizontal.png" alt="" aria-hidden="true" style="display:none"><img id="playerDashRightSprite" src="assets/kim_dash_right.png" alt="" aria-hidden="true" style="display:none"><img id="playerDashLeftSprite" src="assets/kim_dash_left.png" alt="" aria-hidden="true" style="display:none"><img id="playerDashUpSprite" src="assets/kim_dash_up.png" alt="" aria-hidden="true" style="display:none"><img id="playerDashDownSprite" src="assets/kim_dash_down.png" alt="" aria-hidden="true" style="display:none"><canvas id="stageTransition" aria-hidden="true"></canvas><main class="shell"><header class="top"><div class="brand"><small>CBNU · CAMPUS SURVIVAL</small><h1>충북대에서 <em>살아남기</em></h1></div><div class="top-note"><b>WASD</b> 이동 · <b>SPACE</b> 대시 · <b>마우스 커서</b> 조준 · 공격 자동 · <b>좌클릭</b> 특수무기 사격</div></header><section class="layout"><div class="game-card" id="card"><canvas id="game" width="1280" height="720" aria-label="충북대에서 살아남기 게임"></canvas><div class="hud"><div class="hud-group"><div class="chip"><small>SCORE</small><strong id="score">0</strong></div><div class="chip"><small>KILLS</small><strong id="kills">0</strong></div></div><div class="timer" id="time">00:00</div><div class="hud-group"><div class="chip"><small>LEVEL</small><strong id="level">1</strong></div><div class="chip"><small>CHESTS</small><strong id="chests">0</strong></div></div></div><div class="boss-hud hidden" id="bossHud"><div class="boss-title"><span id="bossTypeLabel">⚠ MID BOSS</span><strong id="bossName">청소아주머니</strong></div><div class="boss-bar"><div class="boss-fill" id="bossHpFill"></div><span id="bossHpText">0 / 0</span></div></div><div class="special-hud hidden" id="specialHud"><b id="specialName">특수무기</b><span id="specialInfo">좌클릭으로 사용</span></div><div class="player-stats-hud" id="playerStatsHud"><div class="ps-title"><span>PLAYER STATUS</span><b>LIVE</b></div><div class="player-stat"><span>공격력</span><strong class="attack" id="statAttack">×1.00</strong></div><div class="player-stat"><span>이동속도</span><strong class="speed" id="statSpeed">300</strong></div><div class="player-stat"><span>방어력</span><strong class="defense" id="statDefense">0%</strong></div></div><div class="bars"><div class="bar"><div class="fill hp" id="hp"></div><span id="hpText">HP 130 / 130</span></div><div class="bar"><div class="fill xp" id="xp"></div><span id="xpText">EXP 0 / 35</span></div></div><div class="toast" id="toast"></div><div class="joystick" id="joystick"><div class="stick" id="stick"></div></div>
 <div class="mobile-combat" id="mobileCombat">
@@ -378,13 +579,14 @@ linear-gradient(180deg,#ffe1bd 0%,#f3c998 100%);border:4px solid #fff;box-shadow
     <div class="mobile-aim-stick" id="mobileAimStick"></div>
   </div>
   <div class="mobile-buttons">
+    <button class="mobile-action dash" id="mobileDashBtn" type="button">DASH<small>스태미나 30%</small></button>
     <button class="mobile-action fire" id="mobileFireBtn" type="button">FIRE<small>특수무기 발사</small></button>
   </div>
 </div>
 <div class="rotate-hint">📱 가로모드로 플레이하면 더 편합니다</div><div class="mobile-error" id="mobileError"><b>모바일 오류</b><br><span id="mobileErrorText"></span></div>
 <div class="overlay" id="start"><div class="dialog"><span class="badge">CBNU SURVIVAL</span><h2>오늘도 캠퍼스는<br>마감 전쟁 중!</h2><p>닉네임을 정하고 도전을 시작하세요. 진행상황은 이 브라우저에 자동 저장됩니다.</p><div class="nick-row"><input id="nickname" maxlength="12" autocomplete="nickname" placeholder="닉네임 2~12자" aria-label="플레이어 닉네임"></div><div class="start-actions"><button class="primary" id="startBtn">도전 시작</button><button class="secondary hidden" id="continueBtn">이어하기</button></div><div class="meta-note" id="saveSummary">새로운 도전을 시작하세요.</div><div class="pwa-guide hidden" id="pwaGuide" aria-live="polite"></div><div class="start-rank rank-card-click" id="startRankCard" role="button" tabindex="0" aria-label="전체 온라인 랭킹 열기"><h3>실시간 TOP 5 ↗</h3><div class="rank-list" id="startRanks"><div class="rank"><span>온라인 랭킹 불러오는 중…</span></div></div></div></div></div>
 <div class="overlay hidden" id="characterSelect"><div class="dialog character-dialog"><span class="badge">CHARACTER SELECT</span><h2>캐릭터를 선택하세요</h2><p class="character-sub">캐릭터마다 능력과 시작 무기가 달라질 예정입니다.</p><div class="character-grid">
-<button class="character-card playable selected" id="charKim" type="button" aria-label="김지훈 선택"><span class="character-check">✓</span><div class="character-portrait kim-portrait"><img class="character-fullbody" src="assets/kim_jihoon_fullbody.png" alt="김지훈 전신 캐릭터"></div><span class="character-role">ARCHITECTURE STUDENT</span><h3>김지훈</h3><div class="character-desc">마감에 단련된 건축학도. 삼각스케일을 들고 캠퍼스의 마감 전쟁을 버틴다.</div><div class="character-tags"><span class="character-tag">균형형</span><span class="character-tag">삼각스케일</span><span class="character-tag">초보 추천</span></div></button>
+<button class="character-card playable selected" id="charKim" type="button" aria-label="김지훈 선택"><span class="character-check">✓</span><div class="character-portrait kim-portrait"><img class="character-fullbody" src="assets/kim_jihoon_fullbody.png" alt="김지훈 전신 캐릭터"><img class="character-face-mobile" src="assets/kim_jihoon_face_mobile.png" alt="" aria-hidden="true"></div><span class="character-role">ARCHITECTURE STUDENT</span><h3>김지훈</h3><div class="character-desc">마감에 단련된 건축학도. 삼각스케일을 들고 캠퍼스의 마감 전쟁을 버틴다.</div><div class="character-tags"><span class="character-tag">균형형</span><span class="character-tag">삼각스케일</span><span class="character-tag">초보 추천</span></div></button>
 <div class="character-card locked" aria-disabled="true"><div class="coming-soon">COMING SOON</div><div class="character-portrait"><div class="character-avatar"></div></div><span class="character-role">LOCKED</span><h3>???</h3><div class="character-desc">새로운 생존자가 준비 중입니다.</div></div>
 <div class="character-card locked" aria-disabled="true"><div class="coming-soon">COMING SOON</div><div class="character-portrait"><div class="character-avatar"></div></div><span class="character-role">LOCKED</span><h3>???</h3><div class="character-desc">새로운 생존자가 준비 중입니다.</div></div>
 </div><div class="selected-label">현재 선택: <b id="selectedCharacterName">김지훈</b></div><div class="character-actions"><button class="secondary" id="characterBackBtn">뒤로</button><button class="primary" id="characterStartBtn">다음</button></div></div></div>
@@ -515,15 +717,16 @@ if(typeof ctx.roundRect!=='function'){
   this.lineTo(x+rr,y+h);this.quadraticCurveTo(x,y+h,x,y+h-rr);
   this.lineTo(x,y+rr);this.quadraticCurveTo(x,y,x+rr,y);this.closePath();return this
  }
-}const ui={score:q('#score'),kills:q('#kills'),time:q('#time'),level:q('#level'),chests:q('#chests'),hp:q('#hp'),hpText:q('#hpText'),xp:q('#xp'),xpText:q('#xpText'),start:q('#start'),levelUp:q('#levelUp'),reward:q('#reward'),over:q('#gameOver'),choices:q('#choices'),weapons:q('#weaponList'),toast:q('#toast'),nick:q('#nickname'),stats:q('#finalStats'),ranks:q('#rankList'),startRanks:q('#startRanks'),rankStatus:q('#rankStatus'),rankCard:q('#rankCard'),startRankCard:q('#startRankCard'),fullLeaderboard:q('#fullLeaderboard'),fullRankTable:q('#fullRankTable'),fullRankStatus:q('#fullRankStatus'),fullRankClose:q('#fullRankCloseBtn'),fullRankRefresh:q('#fullRankRefreshBtn'),arrow:q('#chestArrow'),distance:q('#chestDistance'),mapPos:q('#mapPos'),pause:q('#pauseBtn'),bgm:q('#bgmBtn'),sound:q('#soundBtn'),menuBgm:q('#menuBgm'),stage1Bgm:q('#stage1Bgm'),stage1MidbossBgm:q('#stage1MidbossBgm'),stage2Bgm:q('#stage2Bgm'),stage1FinalBossBgm:q('#stage1FinalBossBgm'),playerFrontSprite:q('#playerFrontSprite'),playerSideSprite:q('#playerSideSprite'),playerDashRightSprite:q('#playerDashRightSprite'),playerDashLeftSprite:q('#playerDashLeftSprite'),playerDashUpSprite:q('#playerDashUpSprite'),playerDashDownSprite:q('#playerDashDownSprite'),bossHud:q('#bossHud'),bossTypeLabel:q('#bossTypeLabel'),bossName:q('#bossName'),bossHpFill:q('#bossHpFill'),bossHpText:q('#bossHpText'),statAttack:q('#statAttack'),statSpeed:q('#statSpeed'),statDefense:q('#statDefense'),characterSelect:q('#characterSelect'),characterStart:q('#characterStartBtn'),characterBack:q('#characterBackBtn'),charKim:q('#charKim'),selectedCharacterName:q('#selectedCharacterName'),continueBtn:q('#continueBtn'),saveSummary:q('#saveSummary'),shop:q('#coopsket'),shopMoney:q('#shopMoney'),shopBack:q('#shopBackBtn'),shopNext:q('#shopNextBtn'),upgradeHpLevel:q('#upgradeHpLevel'),upgradeSpeedLevel:q('#upgradeSpeedLevel'),upgradeAttackLevel:q('#upgradeAttackLevel'),upgradeHpBtn:q('#upgradeHpBtn'),upgradeSpeedBtn:q('#upgradeSpeedBtn'),upgradeAttackBtn:q('#upgradeAttackBtn'),stageSelect:q('#stageSelect'),stageCampus:q('#stageCampus'),stageStudio:q('#stageStudio'),stageStudioLock:q('#stageStudioLock'),selectedStageName:q('#selectedStageName'),stageBack:q('#stageBackBtn'),stageStart:q('#stageStartBtn'),difficultyEasy:q('#difficultyEasyBtn'),difficultyNormal:q('#difficultyNormalBtn'),difficultyHard:q('#difficultyHardBtn'),difficultyNote:q('#difficultyNote'),progressReset:q('#progressResetBtn'),postBoss:q('#postBossChoice'),postBossMessage:q('#postBossMessage'),postBossContinue:q('#postBossContinueBtn'),postBossFinish:q('#postBossFinishBtn'),specialHud:q('#specialHud'),specialName:q('#specialName'),specialInfo:q('#specialInfo'),mobileCombat:q('#mobileCombat'),mobileAim:q('#mobileAim'),mobileAimStick:q('#mobileAimStick'),mobileSpecial:null,mobileFire:q('#mobileFireBtn'),mobileError:q('#mobileError'),mobileErrorText:q('#mobileErrorText'),pwaGuide:q('#pwaGuide'),progressResetConfirm:q('#progressResetConfirm'),progressResetCancel:q('#progressResetCancelBtn'),progressResetConfirmBtn:q('#progressResetConfirmBtn'),helpBtn:q('#helpBtn'),helpModal:q('#helpModal'),helpClose:q('#helpCloseBtn'),stageTransition:q('#stageTransition')};
+}const ui={score:q('#score'),kills:q('#kills'),time:q('#time'),level:q('#level'),chests:q('#chests'),hp:q('#hp'),hpText:q('#hpText'),xp:q('#xp'),xpText:q('#xpText'),start:q('#start'),levelUp:q('#levelUp'),reward:q('#reward'),over:q('#gameOver'),choices:q('#choices'),weapons:q('#weaponList'),toast:q('#toast'),nick:q('#nickname'),stats:q('#finalStats'),ranks:q('#rankList'),startRanks:q('#startRanks'),rankStatus:q('#rankStatus'),rankCard:q('#rankCard'),startRankCard:q('#startRankCard'),fullLeaderboard:q('#fullLeaderboard'),fullRankTable:q('#fullRankTable'),fullRankStatus:q('#fullRankStatus'),fullRankClose:q('#fullRankCloseBtn'),fullRankRefresh:q('#fullRankRefreshBtn'),arrow:q('#chestArrow'),distance:q('#chestDistance'),mapPos:q('#mapPos'),pause:q('#pauseBtn'),bgm:q('#bgmBtn'),sound:q('#soundBtn'),menuBgm:q('#menuBgm'),stage1Bgm:q('#stage1Bgm'),stage1MidbossBgm:q('#stage1MidbossBgm'),stage2Bgm:q('#stage2Bgm'),stage1FinalBossBgm:q('#stage1FinalBossBgm'),playerFrontSprite:q('#playerFrontSprite'),playerSideSprite:q('#playerSideSprite'),playerDashRightSprite:q('#playerDashRightSprite'),playerDashLeftSprite:q('#playerDashLeftSprite'),playerDashUpSprite:q('#playerDashUpSprite'),playerDashDownSprite:q('#playerDashDownSprite'),bossHud:q('#bossHud'),bossTypeLabel:q('#bossTypeLabel'),bossName:q('#bossName'),bossHpFill:q('#bossHpFill'),bossHpText:q('#bossHpText'),statAttack:q('#statAttack'),statSpeed:q('#statSpeed'),statDefense:q('#statDefense'),characterSelect:q('#characterSelect'),characterStart:q('#characterStartBtn'),characterBack:q('#characterBackBtn'),charKim:q('#charKim'),selectedCharacterName:q('#selectedCharacterName'),continueBtn:q('#continueBtn'),saveSummary:q('#saveSummary'),shop:q('#coopsket'),shopMoney:q('#shopMoney'),shopBack:q('#shopBackBtn'),shopNext:q('#shopNextBtn'),upgradeHpLevel:q('#upgradeHpLevel'),upgradeSpeedLevel:q('#upgradeSpeedLevel'),upgradeAttackLevel:q('#upgradeAttackLevel'),upgradeHpBtn:q('#upgradeHpBtn'),upgradeSpeedBtn:q('#upgradeSpeedBtn'),upgradeAttackBtn:q('#upgradeAttackBtn'),stageSelect:q('#stageSelect'),stageCampus:q('#stageCampus'),stageStudio:q('#stageStudio'),stageStudioLock:q('#stageStudioLock'),selectedStageName:q('#selectedStageName'),stageBack:q('#stageBackBtn'),stageStart:q('#stageStartBtn'),difficultyEasy:q('#difficultyEasyBtn'),difficultyNormal:q('#difficultyNormalBtn'),difficultyHard:q('#difficultyHardBtn'),difficultyNote:q('#difficultyNote'),progressReset:q('#progressResetBtn'),postBoss:q('#postBossChoice'),postBossMessage:q('#postBossMessage'),postBossContinue:q('#postBossContinueBtn'),postBossFinish:q('#postBossFinishBtn'),specialHud:q('#specialHud'),specialName:q('#specialName'),specialInfo:q('#specialInfo'),mobileCombat:q('#mobileCombat'),mobileAim:q('#mobileAim'),mobileAimStick:q('#mobileAimStick'),mobileSpecial:null,mobileDash:q('#mobileDashBtn'),mobileFire:q('#mobileFireBtn'),mobileError:q('#mobileError'),mobileErrorText:q('#mobileErrorText'),pwaGuide:q('#pwaGuide'),progressResetConfirm:q('#progressResetConfirm'),progressResetCancel:q('#progressResetCancelBtn'),progressResetConfirmBtn:q('#progressResetConfirmBtn'),helpBtn:q('#helpBtn'),helpModal:q('#helpModal'),helpClose:q('#helpCloseBtn'),stageTransition:q('#stageTransition')};
 const isTouchDevice=((window.matchMedia&&window.matchMedia('(pointer:coarse)').matches)||Number(navigator.maxTouchPoints||0)>0||('ontouchstart' in window));
-if(isTouchDevice)document.body.classList.add('touch-ui');
 const isStandalone=window.matchMedia?.('(display-mode: standalone)').matches||window.navigator.standalone===true;
 const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 const isAndroid=/android/i.test(navigator.userAgent);
+const isMobileDevice=isIOS||isAndroid||/mobile|tablet|phone/i.test(navigator.userAgent);
+if(isMobileDevice)document.body.classList.add('touch-ui');
 function clampMobile(v,min,max){return Math.max(min,Math.min(max,v))}
 function syncMobileViewport(){
- if(!isTouchDevice)return;
+ if(!isMobileDevice)return;
  const vv=window.visualViewport;
  const w=Math.max(1,Math.round(vv?.width||window.innerWidth||screen.width||844));
  const h=Math.max(1,Math.round(vv?.height||window.innerHeight||screen.height||390));
@@ -584,7 +787,7 @@ function syncMobileViewport(){
  document.body.dataset.viewport=w+'x'+h;
  document.body.dataset.mobileScale=s.toFixed(3);
 }
-if(isTouchDevice){
+if(isMobileDevice){
  syncMobileViewport();
  window.addEventListener('resize',syncMobileViewport,{passive:true});
  window.addEventListener('orientationchange',()=>setTimeout(syncMobileViewport,80),{passive:true});
@@ -598,7 +801,7 @@ const storage={
 };
 let rankReturnState='menu',helpReturnState='menu',storageWarningShown=false;const leaderboardDecorations=new Map();const keys=new Set();
 window.addEventListener('error',ev=>{
- if(!isTouchDevice)return;
+ if(!isMobileDevice)return;
  const box=q('#mobileError'),txt=q('#mobileErrorText');
  if(box&&txt){txt.textContent=(ev.message||'알 수 없는 오류')+' · 페이지를 새로고침해 주세요.';box.classList.add('show')}
 });
@@ -1286,7 +1489,16 @@ async function beginWithTransition(){
 }
 
 let selectedCharacter='kim';function openCharacterSelect(){const name=ui.nick.value.trim();if(name.length<2){showToast('닉네임을 2자 이상 입력해줘');ui.nick.focus();return}storage.setItem('cbnu-nickname',name);selectedCharacter='kim';ui.charKim.classList.add('selected');ui.selectedCharacterName.textContent='김지훈';ui.characterStart.textContent='다음';hide(ui.start);show(ui.characterSelect)}function openShop(){hide(ui.characterSelect);renderShop();show(ui.shop)}function openStageSelect(){hide(ui.shop);selectedStage='campus';setDifficulty('normal');renderStageSelect();selectStage('campus');show(ui.stageSelect)}async function begin(){const name=ui.nick.value.trim();if(name.length<2){hide(ui.stageSelect);show(ui.start);ui.nick.focus();playMenuBgm(false);return}stopMenuBgm(true);stopStage1Bgm(true);stopStage1MidbossBgm(true);stopStage1FinalBossBgm(true);stopStage2Bgm(true);cancelStage1MidbossTimers();cancelStage1FinalBossTimers();stage1MidbossBgmBoss=null;stage1MidbossBgmPending=false;ensureAudio();storage.setItem('cbnu-nickname',name);clearRunSave();reset();refreshPlayerLeaderboardDecoration();meta.playCount++;saveMeta();runId=taggedRunId(window.crypto?.randomUUID?.()||String(Date.now())+'-'+Math.random().toString(36).slice(2),selectedDifficulty);hide(ui.start);hide(ui.characterSelect);hide(ui.shop);hide(ui.stageSelect);hide(ui.over);if(selectedStage==='studio')startStudioIntro();else{state='play';last=performance.now();saveRun(true);playStage1Bgm(true)}cancelAnimationFrame(raf);raf=requestAnimationFrame(loop)}
-function aimAngle(){const s=screen(p.x,p.y);if(pointer.active)return Math.atan2(pointer.y-s.y,pointer.x-s.x);const e=nearestEnemy();return e?Math.atan2(e.y-p.y,e.x-p.x):0}function nearestEnemy(){let n=null,b=Infinity;for(const e of enemies){if(!e||e.hidden)continue;const d=(e.x-p.x)**2+(e.y-p.y)**2;if(d<b){b=d;n=e}}return n}
+function aimAngle(){
+ if(isMobileDevice){
+  const e=nearestEnemy();
+  return e?Math.atan2(e.y-p.y,e.x-p.x):0;
+ }
+ const s=screen(p.x,p.y);
+ if(pointer.active)return Math.atan2(pointer.y-s.y,pointer.x-s.x);
+ const e=nearestEnemy();
+ return e?Math.atan2(e.y-p.y,e.x-p.x):0
+}function nearestEnemy(){let n=null,b=Infinity;for(const e of enemies){if(!e||e.hidden)continue;const d=(e.x-p.x)**2+(e.y-p.y)**2;if(d<b){b=d;n=e}}return n}
 function spawnEnemy(type,force=false){
 if(!force&&enemies.length>=enemyCap()&&type!=='cleaner'&&type!=='copydog'&&type!=='finalprof'&&type!=='rider'&&type!=='assistant'&&type!=='assistant_rage')return;
 const a=Math.random()*Math.PI*2,d=620+Math.random()*220,x=Math.max(20,Math.min(MW-20,p.x+Math.cos(a)*d)),y=Math.max(20,Math.min(MH-20,p.y+Math.sin(a)*d)),w=wave();
@@ -1397,6 +1609,23 @@ function callAirSupport(){
 function updateSpecialWeapon(dt){
  airStrikeFlash=Math.max(0,airStrikeFlash-dt);specialFireCooldown=Math.max(0,specialFireCooldown-dt);
  if(!specialWeapon||specialWeapon.state!=='equipped')return;
+
+ // Mobile is auto-combat: nearest enemy is targeted and special weapons fire automatically.
+ if(isMobileDevice){
+  const target=nearestEnemy();
+  pointer.active=false;
+  if(target){
+   const ts=screen(target.x,target.y);
+   pointer.x=ts.x;pointer.y=ts.y;
+  }
+  if(specialWeapon.type==='k2')specialFireHeld=!!target;
+  else if(specialWeapon.type==='bazooka'&&target&&!specialWeapon.depleted&&specialWeapon.ammo>0&&specialFireCooldown<=0){
+   fireBazooka();specialFireCooldown=.9;
+  }else if(specialWeapon.type==='air'&&target&&specialFireCooldown<=0){
+   callAirSupport();return;
+  }
+ }
+
  if(specialWeapon.type==='k2'){
   if(specialFireHeld){
    specialWeapon.time-=dt;
@@ -2049,7 +2278,7 @@ function closeFullLeaderboard(){
  if(rankReturnState==='play'){state='play';last=performance.now()}
  rankReturnState='menu'
 }
-function updateUI(){ui.score.textContent=Math.floor(p.score).toLocaleString();ui.kills.textContent=p.kills.toLocaleString();ui.time.textContent=fmt(p.time);ui.level.textContent=p.level;ui.chests.textContent=p.chests;ui.hp.style.width=Math.max(0,p.hp/p.maxHp*100)+'%';ui.hpText.textContent=`HP ${Math.max(0,Math.ceil(p.hp))} / ${p.maxHp}`;ui.xp.style.width=p.xp/p.nextXp*100+'%';ui.xpText.textContent=`EXP ${p.xp} / ${p.nextXp}`;ui.weapons.textContent='';if(p.evolutions?.scaleCutter){const d=document.createElement('div');d.className='weapon';d.innerHTML=`<div class="weapon-icon">${evolutionDefs.scaleCutter.icon}</div><div><b>${evolutionDefs.scaleCutter.name}</b><small>${evolutionDefs.scaleCutter.desc}</small></div><div class="level-pips">${[1,2,3,4,5].map(()=>'<span class="pip on"></span>').join('')}</div>`;ui.weapons.appendChild(d)}if(p.evolutions?.glueDrone){const d=document.createElement('div');d.className='weapon';d.innerHTML=`<div class="weapon-icon">${evolutionDefs.glueDrone.icon}</div><div><b>${evolutionDefs.glueDrone.name}</b><small>${evolutionDefs.glueDrone.desc}</small></div><div class="level-pips">${[1,2,3,4,5].map(()=>'<span class="pip on"></span>').join('')}</div>`;ui.weapons.appendChild(d)}for(const id of Object.keys(weaponDefs)){if(p.evolutions?.scaleCutter&&(id==='scale'||id==='cutter'))continue;if(p.evolutions?.glueDrone&&(id==='glue'||id==='drone'))continue;const lv=p.weapons[id],d=document.createElement('div');d.className='weapon'+(lv?'':' locked');d.innerHTML=`<div class="weapon-icon">${weaponDefs[id].icon}</div><div><b>${weaponDefs[id].name}</b><small>${lv?weaponDefs[id].desc:'상자·레벨업에서 해금'}</small></div><div class="level-pips">${[1,2,3,4,5].map(n=>`<span class="pip ${n<=lv?'on':''}"></span>`).join('')}</div>`;ui.weapons.appendChild(d)}const near=nearestChest();if(near){const a=Math.atan2(near.y-p.y,near.x-p.x);ui.arrow.style.transform=`rotate(${a+Math.PI/2}rad)`;ui.distance.textContent=near.weaponCrate?`🎁 ${Math.round(Math.hypot(near.x-p.x,near.y-p.y)/10)}m 앞에 무기상자`:`${Math.round(Math.hypot(near.x-p.x,near.y-p.y)/10)}m 앞에 상자`}else ui.distance.textContent='곧 새 상자 등장';const activeZones=selectedStage==='studio'?studioZones:landmarks;let lm=activeZones[0],best=Infinity;for(const x of activeZones){const d=Math.hypot(x.x+x.w/2-p.x,x.y+x.h/2-p.y);if(d<best){best=d;lm=x}}ui.mapPos.textContent=lm.n;if(specialWeapon){show(ui.specialHud);ui.specialName.textContent=specialWeapon.type==='k2'?'🔫 K2 소총':specialWeapon.type==='bazooka'?'🚀 바주카포':'✈ 공중지원';if(specialWeapon.type==='k2')ui.specialInfo.textContent=`좌클릭 난사 · 사격시간 ${Math.max(0,specialWeapon.time).toFixed(1)}초`;else if(specialWeapon.type==='bazooka')ui.specialInfo.textContent=`좌클릭 발사 · ${specialWeapon.ammo}발`;else ui.specialInfo.textContent='좌클릭 · 공중지원 요청'}else hide(ui.specialHud);ui.statAttack.textContent=`×${p.damageMul.toFixed(2)} (+${Math.max(0,Math.round((p.damageMul-1)*100))}%)`;const shownSpeed=p.speed*((p.rainbowTimer||0)>0?2:1);ui.statSpeed.textContent=(p.rainbowTimer||0)>0?`${Math.round(shownSpeed)} 🌈 (${p.rainbowTimer.toFixed(1)}s)`:`${Math.round(p.speed)} (+${Math.max(0,Math.round((p.speed/300-1)*100))}%)`;ui.statDefense.textContent=`${Math.round(p.armor*100)}%`;if(isTouchDevice&&ui.mobileFire){if(!specialWeapon)ui.mobileFire.innerHTML='FIRE<small>특수무기 없음</small>';else if(specialWeapon.type==='k2')ui.mobileFire.innerHTML=`FIRE<small>K2 ${Math.max(0,specialWeapon.time).toFixed(1)}초</small>`;else if(specialWeapon.type==='bazooka')ui.mobileFire.innerHTML=`FIRE<small>바주카 ${specialWeapon.ammo}발</small>`;else ui.mobileFire.innerHTML='FIRE<small>공중지원 요청</small>'}const boss=enemies.find(e=>e.type==='assistant_rage')||enemies.find(e=>e.type==='assistant')||enemies.find(e=>e.type==='finalprof')||enemies.find(e=>e.type==='rider')||enemies.find(e=>e.type==='copydog')||enemies.find(e=>e.type==='cleaner');if(boss){show(ui.bossHud);ui.bossTypeLabel.textContent=(boss.type==='finalprof'||boss.type==='assistant'||boss.type==='assistant_rage')?'⚠ FINAL BOSS':'⚠ MID BOSS';ui.bossName.textContent=boss.type==='assistant_rage'?'분노한 조교님':boss.type==='assistant'?'건축학과 조교':boss.type==='finalprof'?'차상우 교수':boss.type==='rider'?'미친 심야 라이더':boss.type==='copydog'?'복사실 강아지':'청소아주머니';ui.bossHpFill.style.width=Math.max(0,boss.hp/boss.maxHp*100)+'%';ui.bossHpText.textContent=`${Math.max(0,Math.ceil(boss.hp)).toLocaleString()} / ${boss.maxHp.toLocaleString()}`}else hide(ui.bossHud)}
+function updateUI(){ui.score.textContent=Math.floor(p.score).toLocaleString();ui.kills.textContent=p.kills.toLocaleString();ui.time.textContent=fmt(p.time);ui.level.textContent=p.level;ui.chests.textContent=p.chests;ui.hp.style.width=Math.max(0,p.hp/p.maxHp*100)+'%';ui.hpText.textContent=`HP ${Math.max(0,Math.ceil(p.hp))} / ${p.maxHp}`;ui.xp.style.width=p.xp/p.nextXp*100+'%';ui.xpText.textContent=`EXP ${p.xp} / ${p.nextXp}`;ui.weapons.textContent='';if(p.evolutions?.scaleCutter){const d=document.createElement('div');d.className='weapon';d.innerHTML=`<div class="weapon-icon">${evolutionDefs.scaleCutter.icon}</div><div><b>${evolutionDefs.scaleCutter.name}</b><small>${evolutionDefs.scaleCutter.desc}</small></div><div class="level-pips">${[1,2,3,4,5].map(()=>'<span class="pip on"></span>').join('')}</div>`;ui.weapons.appendChild(d)}if(p.evolutions?.glueDrone){const d=document.createElement('div');d.className='weapon';d.innerHTML=`<div class="weapon-icon">${evolutionDefs.glueDrone.icon}</div><div><b>${evolutionDefs.glueDrone.name}</b><small>${evolutionDefs.glueDrone.desc}</small></div><div class="level-pips">${[1,2,3,4,5].map(()=>'<span class="pip on"></span>').join('')}</div>`;ui.weapons.appendChild(d)}for(const id of Object.keys(weaponDefs)){if(p.evolutions?.scaleCutter&&(id==='scale'||id==='cutter'))continue;if(p.evolutions?.glueDrone&&(id==='glue'||id==='drone'))continue;const lv=p.weapons[id],d=document.createElement('div');d.className='weapon'+(lv?'':' locked');d.innerHTML=`<div class="weapon-icon">${weaponDefs[id].icon}</div><div><b>${weaponDefs[id].name}</b><small>${lv?weaponDefs[id].desc:'상자·레벨업에서 해금'}</small></div><div class="level-pips">${[1,2,3,4,5].map(n=>`<span class="pip ${n<=lv?'on':''}"></span>`).join('')}</div>`;ui.weapons.appendChild(d)}const near=nearestChest();if(near){const a=Math.atan2(near.y-p.y,near.x-p.x);ui.arrow.style.transform=`rotate(${a+Math.PI/2}rad)`;ui.distance.textContent=near.weaponCrate?`🎁 ${Math.round(Math.hypot(near.x-p.x,near.y-p.y)/10)}m 앞에 무기상자`:`${Math.round(Math.hypot(near.x-p.x,near.y-p.y)/10)}m 앞에 상자`}else ui.distance.textContent='곧 새 상자 등장';const activeZones=selectedStage==='studio'?studioZones:landmarks;let lm=activeZones[0],best=Infinity;for(const x of activeZones){const d=Math.hypot(x.x+x.w/2-p.x,x.y+x.h/2-p.y);if(d<best){best=d;lm=x}}ui.mapPos.textContent=lm.n;if(specialWeapon){show(ui.specialHud);ui.specialName.textContent=specialWeapon.type==='k2'?'🔫 K2 소총':specialWeapon.type==='bazooka'?'🚀 바주카포':'✈ 공중지원';if(specialWeapon.type==='k2')ui.specialInfo.textContent=`좌클릭 난사 · 사격시간 ${Math.max(0,specialWeapon.time).toFixed(1)}초`;else if(specialWeapon.type==='bazooka')ui.specialInfo.textContent=`좌클릭 발사 · ${specialWeapon.ammo}발`;else ui.specialInfo.textContent='좌클릭 · 공중지원 요청'}else hide(ui.specialHud);ui.statAttack.textContent=`×${p.damageMul.toFixed(2)} (+${Math.max(0,Math.round((p.damageMul-1)*100))}%)`;const shownSpeed=p.speed*((p.rainbowTimer||0)>0?2:1);ui.statSpeed.textContent=(p.rainbowTimer||0)>0?`${Math.round(shownSpeed)} 🌈 (${p.rainbowTimer.toFixed(1)}s)`:`${Math.round(p.speed)} (+${Math.max(0,Math.round((p.speed/300-1)*100))}%)`;ui.statDefense.textContent=`${Math.round(p.armor*100)}%`;if(isMobileDevice&&ui.mobileFire){if(!specialWeapon)ui.mobileFire.innerHTML='FIRE<small>특수무기 없음</small>';else if(specialWeapon.type==='k2')ui.mobileFire.innerHTML=`FIRE<small>K2 ${Math.max(0,specialWeapon.time).toFixed(1)}초</small>`;else if(specialWeapon.type==='bazooka')ui.mobileFire.innerHTML=`FIRE<small>바주카 ${specialWeapon.ammo}발</small>`;else ui.mobileFire.innerHTML='FIRE<small>공중지원 요청</small>'}const boss=enemies.find(e=>e.type==='assistant_rage')||enemies.find(e=>e.type==='assistant')||enemies.find(e=>e.type==='finalprof')||enemies.find(e=>e.type==='rider')||enemies.find(e=>e.type==='copydog')||enemies.find(e=>e.type==='cleaner');if(boss){show(ui.bossHud);ui.bossTypeLabel.textContent=(boss.type==='finalprof'||boss.type==='assistant'||boss.type==='assistant_rage')?'⚠ FINAL BOSS':'⚠ MID BOSS';ui.bossName.textContent=boss.type==='assistant_rage'?'분노한 조교님':boss.type==='assistant'?'건축학과 조교':boss.type==='finalprof'?'차상우 교수':boss.type==='rider'?'미친 심야 라이더':boss.type==='copydog'?'복사실 강아지':'청소아주머니';ui.bossHpFill.style.width=Math.max(0,boss.hp/boss.maxHp*100)+'%';ui.bossHpText.textContent=`${Math.max(0,Math.ceil(boss.hp)).toLocaleString()} / ${boss.maxHp.toLocaleString()}`}else hide(ui.bossHud)}
 function nearestChest(){let n=null,b=Infinity;for(const c of weaponCrates){const d=(c.x-p.x)**2+(c.y-p.y)**2;if(d<b){b=d;n={...c,weaponCrate:true}}}for(const c of chests){const d=(c.x-p.x)**2+(c.y-p.y)**2;if(d<b){b=d;n=c}}return n}function showToast(t){ui.toast.textContent=t;ui.toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>ui.toast.classList.remove('show'),1600)}
 function rr(x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}
 function shadowEllipse(x,y,rx,ry,alpha=.22){ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle='#203028';ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fill();ctx.restore()}
@@ -2619,7 +2848,7 @@ document.addEventListener('click',unlockMenuBgm);
 document.addEventListener('keydown',unlockMenuBgm);
 const aimEl=ui.mobileAim,aimStick=ui.mobileAimStick;
 function mobileAimMove(e){
- if(!isTouchDevice||state!=='play')return;
+ if(!isMobileDevice||state!=='play')return;
  const r=aimEl.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2,l=Math.hypot(x,y)||1,m=Math.min(34,l);
  const nx=x/l,ny=y/l;
  aimStick.style.transform=`translate(${nx*m}px,${ny*m}px)`;
@@ -2647,6 +2876,11 @@ function mobileFireStart(e){
  }
 }
 function mobileFireEnd(e){if(e){e.preventDefault();e.stopPropagation()}specialFireHeld=false}
+if(ui.mobileDash){
+ const mobileDashPress=e=>{if(e){e.preventDefault();e.stopPropagation()}attemptDash()};
+ ui.mobileDash.addEventListener('pointerdown',mobileDashPress);
+ ui.mobileDash.addEventListener('click',e=>e.preventDefault());
+}
 if(ui.mobileFire){
  ui.mobileFire.addEventListener('pointerdown',mobileFireStart);
  ui.mobileFire.addEventListener('pointerup',mobileFireEnd);
@@ -2675,7 +2909,7 @@ if(!('PointerEvent' in window)){
 }
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&(state==='play'||state==='pause')){saveRun(true);if(state==='play')togglePause()}});addEventListener('beforeunload',()=>saveRun(true));
 const mc=document.modelContext;if(mc?.registerTool){/* GitHub Pages build: in-page leaderboard is handled by Supabase REST. */}
-if(ui.pwaGuide&&isTouchDevice){
+if(ui.pwaGuide&&isMobileDevice){
  let installLine='';
  if(isStandalone){
   installLine='<div class="guide-line">✅ 홈 화면 실행 모드입니다. 휴대폰을 <b>가로로 돌려</b> 플레이하세요.</div>';
@@ -2689,7 +2923,7 @@ if(ui.pwaGuide&&isTouchDevice){
  ui.pwaGuide.innerHTML=
   '<div class="guide-title">📱 모바일 플레이 방법</div>'+
   '<div class="guide-line">↔️ <b>가로 화면 권장</b> · 게임 시작 후 화면이 게임 전용으로 표시됩니다.</div>'+
-  '<div class="guide-line">🕹️ 왼쪽 조이스틱: 이동 · 오른쪽 조준 패드: 조준 · FIRE: 특수무기 발사</div>'+
+  '<div class="guide-line">🕹️ 왼쪽 조이스틱: 이동 · 공격/조준: 자동 · DASH: 짧은 대시</div>'+
   installLine+
   '<div class="guide-tip">진행상황은 현재 브라우저의 저장공간에 자동 저장됩니다.</div>';
  ui.pwaGuide.classList.remove('hidden');
