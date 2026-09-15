@@ -269,54 +269,93 @@ linear-gradient(180deg,#ffe1bd 0%,#f3c998 100%);border:4px solid #fff;box-shadow
 
 /* Mobile landscape: game-only fullscreen view */
 @media (pointer:coarse) and (orientation:landscape){
-  html,body{width:100%;height:100%;height:100dvh;overflow:hidden;background:#000}
-  body.touch-ui{position:fixed;inset:0;width:100vw;height:100dvh;overflow:hidden}
-  body.touch-ui .shell{width:100vw;height:100dvh;max-width:none;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden;background:#000}
+  body.touch-ui{
+    position:fixed;left:0;top:0;
+    width:var(--mobile-vw,100vw);height:var(--mobile-vh,100dvh);
+    overflow:hidden
+  }
+  body.touch-ui .shell{
+    width:var(--mobile-vw,100vw);height:var(--mobile-vh,100dvh);
+    max-width:none;margin:0;padding:0
+  }
   body.touch-ui .top,
   body.touch-ui .side,
   body.touch-ui .game-underbar{display:none!important}
-  body.touch-ui .layout{display:block;width:100vw;height:100dvh;margin:0;padding:0}
+  body.touch-ui .layout{
+    display:block;width:var(--mobile-vw,100vw);height:var(--mobile-vh,100dvh);
+    margin:0;padding:0
+  }
   body.touch-ui .game-card{
-    position:fixed;inset:0;width:100vw;height:100dvh;
+    position:fixed;left:0;top:0;
+    width:var(--mobile-vw,100vw);height:var(--mobile-vh,100dvh);
     margin:0;padding:0;border:0;border-radius:0;box-shadow:none;
     overflow:hidden;background:#080c14
   }
   body.touch-ui #game{
     position:absolute;left:50%;top:50%;
-    width:max(100vw,calc(100dvh * 16 / 9));
-    height:auto;max-width:none;
+    width:var(--mobile-canvas-w,max(100vw,calc(100dvh * 16 / 9)));
+    height:var(--mobile-canvas-h,auto);
+    max-width:none;
     aspect-ratio:16/9;
     transform:translate(-50%,-50%);
   }
-  body.touch-ui .hud{
-    top:max(7px,env(safe-area-inset-top));
-    left:max(8px,env(safe-area-inset-left));
-    right:max(8px,env(safe-area-inset-right));
-  }
-  body.touch-ui .bars{
-    left:max(8px,env(safe-area-inset-left));
-    right:max(8px,env(safe-area-inset-right));
-    bottom:max(7px,env(safe-area-inset-bottom));
-  }
+
+  /* JS-calculated responsive mobile UI sizes */
   body.touch-ui .joystick{
-    left:max(14px,env(safe-area-inset-left));
-    bottom:max(28px,calc(env(safe-area-inset-bottom) + 18px));
+    width:var(--mobile-joy-size,106px);
+    height:var(--mobile-joy-size,106px);
+    left:max(var(--mobile-edge,14px),env(safe-area-inset-left));
+    bottom:max(var(--mobile-bottom,28px),calc(env(safe-area-inset-bottom) + 10px));
+  }
+  body.touch-ui .stick{
+    width:var(--mobile-stick-size,40px);
+    height:var(--mobile-stick-size,40px);
+    left:var(--mobile-stick-offset,33px);
+    top:var(--mobile-stick-offset,33px);
   }
   body.touch-ui .mobile-aim{
-    right:max(116px,calc(env(safe-area-inset-right) + 110px));
-    bottom:max(30px,calc(env(safe-area-inset-bottom) + 20px));
+    width:var(--mobile-aim-size,108px);
+    height:var(--mobile-aim-size,108px);
+    right:max(var(--mobile-aim-right,126px),calc(env(safe-area-inset-right) + 100px));
+    bottom:max(var(--mobile-bottom,30px),calc(env(safe-area-inset-bottom) + 10px));
+  }
+  body.touch-ui .mobile-aim-stick{
+    width:var(--mobile-aim-stick-size,40px);
+    height:var(--mobile-aim-stick-size,40px);
+    left:var(--mobile-aim-stick-offset,34px);
+    top:var(--mobile-aim-stick-offset,34px);
   }
   body.touch-ui .mobile-buttons{
-    right:max(8px,env(safe-area-inset-right));
-    bottom:max(30px,calc(env(safe-area-inset-bottom) + 20px));
+    right:max(var(--mobile-edge,8px),env(safe-area-inset-right));
+    bottom:max(var(--mobile-bottom,30px),calc(env(safe-area-inset-bottom) + 10px));
+    gap:var(--mobile-btn-gap,9px)
+  }
+  body.touch-ui .mobile-action{
+    width:var(--mobile-btn-w,94px);
+    min-height:var(--mobile-btn-h,48px);
+    font-size:var(--mobile-btn-font,.72rem)
+  }
+  body.touch-ui .mobile-action.fire{min-height:var(--mobile-fire-h,66px)}
+  body.touch-ui .hud{
+    top:max(var(--mobile-hud-edge,7px),env(safe-area-inset-top));
+    left:max(var(--mobile-hud-edge,8px),env(safe-area-inset-left));
+    right:max(var(--mobile-hud-edge,8px),env(safe-area-inset-right));
+  }
+  body.touch-ui .bars{
+    left:max(var(--mobile-hud-edge,8px),env(safe-area-inset-left));
+    right:max(var(--mobile-hud-edge,8px),env(safe-area-inset-right));
+    bottom:max(var(--mobile-bar-bottom,7px),env(safe-area-inset-bottom));
   }
   body.touch-ui .special-hud{
-    right:max(8px,env(safe-area-inset-right));
-    bottom:max(136px,calc(env(safe-area-inset-bottom) + 126px));
+    right:max(var(--mobile-edge,8px),env(safe-area-inset-right));
+    bottom:max(var(--mobile-special-bottom,136px),calc(env(safe-area-inset-bottom) + 100px));
   }
   body.touch-ui .player-stats-hud{
-    left:max(8px,env(safe-area-inset-left));
-    top:max(54px,calc(env(safe-area-inset-top) + 46px));
+    left:max(var(--mobile-hud-edge,8px),env(safe-area-inset-left));
+    top:max(var(--mobile-stats-top,54px),calc(env(safe-area-inset-top) + 42px));
+    transform:scale(var(--mobile-panel-scale,1));
+    transform-origin:left top
   }
   body.touch-ui .rotate-hint{display:none!important}
 }
@@ -482,6 +521,76 @@ if(isTouchDevice)document.body.classList.add('touch-ui');
 const isStandalone=window.matchMedia?.('(display-mode: standalone)').matches||window.navigator.standalone===true;
 const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 const isAndroid=/android/i.test(navigator.userAgent);
+function clampMobile(v,min,max){return Math.max(min,Math.min(max,v))}
+function syncMobileViewport(){
+ if(!isTouchDevice)return;
+ const vv=window.visualViewport;
+ const w=Math.max(1,Math.round(vv?.width||window.innerWidth||screen.width||844));
+ const h=Math.max(1,Math.round(vv?.height||window.innerHeight||screen.height||390));
+
+ // Base reference is roughly a modern phone in landscape.
+ // Height matters more for controls because phones have widely varying aspect ratios.
+ const rawScale=Math.min(w/844,h/390);
+ const s=clampMobile(rawScale,.72,1.24);
+ const panelScale=clampMobile(s,.78,1.10);
+
+ const joy=Math.round(clampMobile(106*s,82,126));
+ const stick=Math.round(clampMobile(40*s,31,48));
+ const aim=Math.round(clampMobile(108*s,84,128));
+ const aimStick=Math.round(clampMobile(40*s,31,48));
+ const btnW=Math.round(clampMobile(94*s,74,110));
+ const btnH=Math.round(clampMobile(48*s,40,58));
+ const fireH=Math.round(clampMobile(66*s,52,78));
+ const edge=Math.round(clampMobile(10*s,7,14));
+ const bottom=Math.round(clampMobile(24*s,14,34));
+ const btnGap=Math.round(clampMobile(9*s,6,11));
+
+ // Center-crop a 16:9 canvas to fill the current visual viewport.
+ const viewportAspect=w/h;
+ let canvasW,canvasH;
+ if(viewportAspect>=16/9){
+  canvasW=w;canvasH=w*9/16;
+ }else{
+  canvasH=h;canvasW=h*16/9;
+ }
+
+ const root=document.documentElement;
+ root.style.setProperty('--mobile-vw',w+'px');
+ root.style.setProperty('--mobile-vh',h+'px');
+ root.style.setProperty('--mobile-canvas-w',Math.ceil(canvasW)+'px');
+ root.style.setProperty('--mobile-canvas-h',Math.ceil(canvasH)+'px');
+ root.style.setProperty('--mobile-joy-size',joy+'px');
+ root.style.setProperty('--mobile-stick-size',stick+'px');
+ root.style.setProperty('--mobile-stick-offset',Math.round((joy-stick)/2)+'px');
+ root.style.setProperty('--mobile-aim-size',aim+'px');
+ root.style.setProperty('--mobile-aim-stick-size',aimStick+'px');
+ root.style.setProperty('--mobile-aim-stick-offset',Math.round((aim-aimStick)/2)+'px');
+ root.style.setProperty('--mobile-btn-w',btnW+'px');
+ root.style.setProperty('--mobile-btn-h',btnH+'px');
+ root.style.setProperty('--mobile-fire-h',fireH+'px');
+ root.style.setProperty('--mobile-btn-font',clampMobile(.72*s,.62,.82).toFixed(2)+'rem');
+ root.style.setProperty('--mobile-btn-gap',btnGap+'px');
+ root.style.setProperty('--mobile-edge',edge+'px');
+ root.style.setProperty('--mobile-bottom',bottom+'px');
+ root.style.setProperty('--mobile-hud-edge',Math.round(clampMobile(8*s,5,11))+'px');
+ root.style.setProperty('--mobile-bar-bottom',Math.round(clampMobile(7*s,4,10))+'px');
+ root.style.setProperty('--mobile-panel-scale',panelScale.toFixed(3));
+ root.style.setProperty('--mobile-stats-top',Math.round(clampMobile(54*s,43,64))+'px');
+
+ // Keep aim pad clear of the action-button column on all screen widths.
+ root.style.setProperty('--mobile-aim-right',Math.round(btnW+edge+Math.max(16,18*s))+'px');
+ root.style.setProperty('--mobile-special-bottom',Math.round(bottom+fireH+btnH+btnGap*2+18*s)+'px');
+
+ document.body.dataset.viewport=w+'x'+h;
+ document.body.dataset.mobileScale=s.toFixed(3);
+}
+if(isTouchDevice){
+ syncMobileViewport();
+ window.addEventListener('resize',syncMobileViewport,{passive:true});
+ window.addEventListener('orientationchange',()=>setTimeout(syncMobileViewport,80),{passive:true});
+ window.visualViewport?.addEventListener('resize',syncMobileViewport,{passive:true});
+ window.visualViewport?.addEventListener('scroll',syncMobileViewport,{passive:true});
+}
 const storage={
  getItem(k){try{return window.localStorage.getItem(k)}catch{return null}},
  setItem(k,v){try{window.localStorage.setItem(k,v);return true}catch{return false}},
