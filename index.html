@@ -9,8 +9,12 @@
 <title>충북대에서 살아남기</title>
 <style>
 :root{--ink:#f7f3e8;--muted:#98a2b5;--panel:#111827;--line:#2a3449;--yellow:#ffcf5a;--red:#ff5d55;--cyan:#53d4ff;--green:#70e6a6;--purple:#b98cff}*{box-sizing:border-box}html,body{margin:0;min-height:100%;min-height:100dvh;background:#05070c;color:var(--ink);font-family:Pretendard,"Noto Sans KR",system-ui,sans-serif}body{background:radial-gradient(circle at 48% -20%,#2a334a 0,#0b101c 43%,#05070c 78%)}button,input{font:inherit}button:focus-visible,input:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}.shell{width:min(1600px,100%);margin:auto;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
-.pwa-guide{margin:9px auto 0;padding:9px 11px;border:1px solid #70e6a655;border-radius:10px;background:#1231268c;color:#eafff3;font-size:.72rem;line-height:1.45;text-align:left}
-.pwa-guide b{color:#70e6a6}.pwa-guide.hidden{display:none}.top{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:2px 3px 10px}.brand small{display:block;color:var(--yellow);font-size:.72rem;font-weight:950;letter-spacing:.16em}.brand h1{font-size:clamp(1.2rem,2.5vw,2rem);line-height:1;margin:4px 0 0}.brand em{color:var(--red);font-style:normal}.top-note{color:var(--muted);font-size:.82rem;text-align:right}.top-note b{color:var(--ink)}.layout{display:grid;grid-template-columns:minmax(0,1fr) 315px;grid-template-rows:auto auto;gap:11px}
+.pwa-guide{margin:10px auto 0;padding:10px 12px;border:1px solid #70e6a655;border-radius:11px;background:#1231268c;color:#eafff3;font-size:.72rem;line-height:1.5;text-align:left}
+.pwa-guide b{color:#70e6a6}.pwa-guide.hidden{display:none}
+.pwa-guide .guide-title{display:flex;align-items:center;gap:6px;margin-bottom:5px;font-size:.78rem;font-weight:950;color:#fff}
+.pwa-guide .guide-line{margin:3px 0;color:#eafff3}
+.pwa-guide .guide-tip{margin-top:6px;padding-top:6px;border-top:1px solid #ffffff1f;color:#bfe8d2;font-size:.68rem}
+.top{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:2px 3px 10px}.brand small{display:block;color:var(--yellow);font-size:.72rem;font-weight:950;letter-spacing:.16em}.brand h1{font-size:clamp(1.2rem,2.5vw,2rem);line-height:1;margin:4px 0 0}.brand em{color:var(--red);font-style:normal}.top-note{color:var(--muted);font-size:.82rem;text-align:right}.top-note b{color:var(--ink)}.layout{display:grid;grid-template-columns:minmax(0,1fr) 315px;grid-template-rows:auto auto;gap:11px}
 .game-card{grid-column:1;grid-row:1}
 .side{grid-column:2;grid-row:1 / span 2}
 .game-underbar{grid-column:1;grid-row:2;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:58px;padding:8px 10px;border:1px solid #c8d9ce;border-radius:13px;background:linear-gradient(180deg,#f8fbf8,#edf5ef);box-shadow:0 8px 24px #27443412}
@@ -263,6 +267,60 @@ linear-gradient(180deg,#ffe1bd 0%,#f3c998 100%);border:4px solid #fff;box-shadow
   body.touch-ui .special-hud{right:8px;bottom:140px}
 }
 
+/* Mobile landscape: game-only fullscreen view */
+@media (pointer:coarse) and (orientation:landscape){
+  html,body{width:100%;height:100%;height:100dvh;overflow:hidden;background:#000}
+  body.touch-ui{position:fixed;inset:0;width:100vw;height:100dvh;overflow:hidden}
+  body.touch-ui .shell{width:100vw;height:100dvh;max-width:none;margin:0;padding:0}
+  body.touch-ui .top,
+  body.touch-ui .side,
+  body.touch-ui .game-underbar{display:none!important}
+  body.touch-ui .layout{display:block;width:100vw;height:100dvh;margin:0;padding:0}
+  body.touch-ui .game-card{
+    position:fixed;inset:0;width:100vw;height:100dvh;
+    margin:0;padding:0;border:0;border-radius:0;box-shadow:none;
+    overflow:hidden;background:#080c14
+  }
+  body.touch-ui #game{
+    position:absolute;left:50%;top:50%;
+    width:max(100vw,calc(100dvh * 16 / 9));
+    height:auto;max-width:none;
+    aspect-ratio:16/9;
+    transform:translate(-50%,-50%);
+  }
+  body.touch-ui .hud{
+    top:max(7px,env(safe-area-inset-top));
+    left:max(8px,env(safe-area-inset-left));
+    right:max(8px,env(safe-area-inset-right));
+  }
+  body.touch-ui .bars{
+    left:max(8px,env(safe-area-inset-left));
+    right:max(8px,env(safe-area-inset-right));
+    bottom:max(7px,env(safe-area-inset-bottom));
+  }
+  body.touch-ui .joystick{
+    left:max(14px,env(safe-area-inset-left));
+    bottom:max(28px,calc(env(safe-area-inset-bottom) + 18px));
+  }
+  body.touch-ui .mobile-aim{
+    right:max(116px,calc(env(safe-area-inset-right) + 110px));
+    bottom:max(30px,calc(env(safe-area-inset-bottom) + 20px));
+  }
+  body.touch-ui .mobile-buttons{
+    right:max(8px,env(safe-area-inset-right));
+    bottom:max(30px,calc(env(safe-area-inset-bottom) + 20px));
+  }
+  body.touch-ui .special-hud{
+    right:max(8px,env(safe-area-inset-right));
+    bottom:max(136px,calc(env(safe-area-inset-bottom) + 126px));
+  }
+  body.touch-ui .player-stats-hud{
+    left:max(8px,env(safe-area-inset-left));
+    top:max(54px,calc(env(safe-area-inset-top) + 46px));
+  }
+  body.touch-ui .rotate-hint{display:none!important}
+}
+
 .reset-warning{color:#ff827b!important;font-weight:900}.reset-actions{display:flex;gap:8px;justify-content:center}.reset-actions .danger-confirm{background:#e14d4d;color:#fff}
 
 #start .dialog{scrollbar-width:thin;scrollbar-color:#b8c9bd transparent}
@@ -285,7 +343,7 @@ linear-gradient(180deg,#ffe1bd 0%,#f3c998 100%);border:4px solid #fff;box-shadow
   </div>
 </div>
 <div class="rotate-hint">📱 가로모드로 플레이하면 더 편합니다</div><div class="mobile-error" id="mobileError"><b>모바일 오류</b><br><span id="mobileErrorText"></span></div>
-<div class="overlay" id="start"><div class="dialog"><span class="badge">CBNU SURVIVAL</span><h2>오늘도 캠퍼스는<br>마감 전쟁 중!</h2><p>닉네임을 정하고 도전을 시작하세요. 진행상황은 이 브라우저에 자동 저장됩니다.</p><div class="nick-row"><input id="nickname" maxlength="12" autocomplete="nickname" placeholder="닉네임 2~12자" aria-label="플레이어 닉네임"></div><div class="start-actions"><button class="primary" id="startBtn">도전 시작</button><button class="secondary hidden" id="continueBtn">이어하기</button></div><div class="meta-note" id="saveSummary">새로운 도전을 시작하세요.</div><div class="pwa-guide hidden" id="pwaGuide"><b>📱 iPhone 설치:</b> Safari의 공유 버튼 → <b>홈 화면에 추가</b> → 홈 화면 아이콘으로 실행하세요. 설치 후에는 주소창 없이 앱처럼 실행됩니다.</div><div class="start-rank rank-card-click" id="startRankCard" role="button" tabindex="0" aria-label="전체 온라인 랭킹 열기"><h3>실시간 TOP 5 ↗</h3><div class="rank-list" id="startRanks"><div class="rank"><span>온라인 랭킹 불러오는 중…</span></div></div></div></div></div>
+<div class="overlay" id="start"><div class="dialog"><span class="badge">CBNU SURVIVAL</span><h2>오늘도 캠퍼스는<br>마감 전쟁 중!</h2><p>닉네임을 정하고 도전을 시작하세요. 진행상황은 이 브라우저에 자동 저장됩니다.</p><div class="nick-row"><input id="nickname" maxlength="12" autocomplete="nickname" placeholder="닉네임 2~12자" aria-label="플레이어 닉네임"></div><div class="start-actions"><button class="primary" id="startBtn">도전 시작</button><button class="secondary hidden" id="continueBtn">이어하기</button></div><div class="meta-note" id="saveSummary">새로운 도전을 시작하세요.</div><div class="pwa-guide hidden" id="pwaGuide" aria-live="polite"></div><div class="start-rank rank-card-click" id="startRankCard" role="button" tabindex="0" aria-label="전체 온라인 랭킹 열기"><h3>실시간 TOP 5 ↗</h3><div class="rank-list" id="startRanks"><div class="rank"><span>온라인 랭킹 불러오는 중…</span></div></div></div></div></div>
 <div class="overlay hidden" id="characterSelect"><div class="dialog character-dialog"><span class="badge">CHARACTER SELECT</span><h2>캐릭터를 선택하세요</h2><p class="character-sub">캐릭터마다 능력과 시작 무기가 달라질 예정입니다.</p><div class="character-grid">
 <button class="character-card playable selected" id="charKim" type="button" aria-label="김지훈 선택"><span class="character-check">✓</span><div class="character-portrait kim-portrait"><img class="character-fullbody" src="assets/kim_jihoon_fullbody.png" alt="김지훈 전신 캐릭터"></div><span class="character-role">ARCHITECTURE STUDENT</span><h3>김지훈</h3><div class="character-desc">마감에 단련된 건축학도. 삼각스케일을 들고 캠퍼스의 마감 전쟁을 버틴다.</div><div class="character-tags"><span class="character-tag">균형형</span><span class="character-tag">삼각스케일</span><span class="character-tag">초보 추천</span></div></button>
 <div class="character-card locked" aria-disabled="true"><div class="coming-soon">COMING SOON</div><div class="character-portrait"><div class="character-avatar"></div></div><span class="character-role">LOCKED</span><h3>???</h3><div class="character-desc">새로운 생존자가 준비 중입니다.</div></div>
@@ -423,6 +481,7 @@ const isTouchDevice=((window.matchMedia&&window.matchMedia('(pointer:coarse)').m
 if(isTouchDevice)document.body.classList.add('touch-ui');
 const isStandalone=window.matchMedia?.('(display-mode: standalone)').matches||window.navigator.standalone===true;
 const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const isAndroid=/android/i.test(navigator.userAgent);
 const storage={
  getItem(k){try{return window.localStorage.getItem(k)}catch{return null}},
  setItem(k,v){try{window.localStorage.setItem(k,v);return true}catch{return false}},
@@ -2507,7 +2566,25 @@ if(!('PointerEvent' in window)){
 }
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&(state==='play'||state==='pause')){saveRun(true);if(state==='play')togglePause()}});addEventListener('beforeunload',()=>saveRun(true));
 const mc=document.modelContext;if(mc?.registerTool){/* GitHub Pages build: in-page leaderboard is handled by Supabase REST. */}
-if(ui.pwaGuide&&isIOS&&!isStandalone)ui.pwaGuide.classList.remove('hidden');
+if(ui.pwaGuide&&isTouchDevice){
+ let installLine='';
+ if(isStandalone){
+  installLine='<div class="guide-line">✅ 홈 화면 실행 모드입니다. 휴대폰을 <b>가로로 돌려</b> 플레이하세요.</div>';
+ }else if(isIOS){
+  installLine='<div class="guide-line">🍎 iPhone/iPad: <b>Safari → 공유 → 홈 화면에 추가 → 웹 앱으로 열기 → 추가</b></div>';
+ }else if(isAndroid){
+  installLine='<div class="guide-line">🤖 Android: <b>Chrome → ⋮ → 설치 및 바로가기 만들기 → 설치</b></div>';
+ }else{
+  installLine='<div class="guide-line">📲 브라우저 메뉴에서 <b>홈 화면에 추가 / 앱 설치</b> 후 가로로 실행하세요.</div>';
+ }
+ ui.pwaGuide.innerHTML=
+  '<div class="guide-title">📱 모바일 플레이 방법</div>'+
+  '<div class="guide-line">↔️ <b>가로 화면 권장</b> · 게임 시작 후 화면이 게임 전용으로 표시됩니다.</div>'+
+  '<div class="guide-line">🕹️ 왼쪽 조이스틱: 이동 · 오른쪽 조준 패드: 조준 · FIRE: 특수무기 발사</div>'+
+  installLine+
+  '<div class="guide-tip">진행상황은 현재 브라우저의 저장공간에 자동 저장됩니다.</div>';
+ ui.pwaGuide.classList.remove('hidden');
+}
 ui.nick.value=storage.getItem('cbnu-nickname')||'';updateSoundButton();updateBgmButton();reset();renderShop();refreshContinue();loadRanks();playMenuBgm(false);
 if('serviceWorker' in navigator){
  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}),{once:true});
